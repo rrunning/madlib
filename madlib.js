@@ -21,9 +21,19 @@ function submit() {
 }
 
 function createArray(userInput, defaultWords) {
-	var userWords = userInput.value.split(',');	
+	var preTrimWords = userInput.value.split(',');
+	var userWords = []
+	for (i = 0; i < preTrimWords.length; i++) {
+		var bushWhacker = preTrimWords[i].trim()
+		if ( bushWhacker !== '') {
+		userWords.push(bushWhacker);
+		}
+	} 	
+		console.log(userWords);
 	while (userWords.length < 4) {
 		userWords.push(defaultWords[Math.floor(Math.random() * 10)]);
 	}
 	return userWords;
 }
+
+// randomly append the items in the 'final' arrays to the stories.
