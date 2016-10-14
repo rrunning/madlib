@@ -1,0 +1,7 @@
+Create default word arrays
+Randomize selection of default values.
+Comma separated user inputs
+User inputs placed into array
+Array feeds into story.
+Story array = user inputs + default values (if needed)
+Randomize order of values used.
