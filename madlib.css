@@ -1,0 +1,39 @@
+html {
+	font-family: 'Trirong', serif;
+	text-align: center;
+	font-size: 16px;
+	background-color: #ebf5fb;
+}
+button {
+	margin: 30px;
+	height: 45px;
+	font-size: 16px;
+	background-color: #d6d6d6;
+	border-radius: 6px;
+}
+label {
+	float: left;
+	margin-right: 10px;
+}
+.field {
+	height: 20px;
+	width: 250px;
+	padding-left: 10px;
+	border-radius: 5px;
+	float: left;
+}
+.buttons {
+	margin: 10px;
+}
+.stories {
+	display: none;
+}
+.stories.show {
+	display: block;
+}
+.story-container {
+	margin: 35px;
+}
+.fields-and-labels {
+	display: inline-block;
+}

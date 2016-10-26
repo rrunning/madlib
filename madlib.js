@@ -9,31 +9,74 @@ var defaultAdjectives = ['bland', 'deficient', 'motherly', 'passionate', 'rotten
 var defaultAdverbs = ['deeply', 'famously', 'brutally', 'anywhere', 'miserably', 'neatly', 'openly', 'reproachfully', 'ruthlessely', 'politely'];
 
 
-function submit() {
+function submit(story) {
 	var finalNouns = createArray(userNouns, defaultNouns);
 	var finalVerbs = createArray(userVerbs, defaultVerbs);
 	var finalAdverbs = createArray(userAdverbs, defaultAdverbs);
 	var finalAdjectives = createArray(userAdjectives, defaultAdjectives);
-	console.log(finalAdjectives);
-	console.log(finalAdverbs);
-	console.log(finalNouns);
-	console.log(finalVerbs);
+
+	if (finalNouns.length > 4 || finalVerbs.length > 4 || finalAdjectives.length > 4 || finalAdverbs.length > 4) {
+		return alert("Please enter only 4 words in each field.");
+	}
+// make a variable for the id
+	hideStories();
+	display(story);
+	assignWords(finalNouns, 'noun', story)
+	assignWords(finalVerbs, 'verb', story)
+	assignWords(finalAdjectives, 'adjective', story)
+	assignWords(finalAdverbs, 'adverb', story)
+
 }
 
 function createArray(userInput, defaultWords) {
 	var preTrimWords = userInput.value.split(',');
 	var userWords = []
-	for (i = 0; i < preTrimWords.length; i++) {
+	for (var i = 0; i < preTrimWords.length; i++) {
 		var bushWhacker = preTrimWords[i].trim()
-		if ( bushWhacker !== '') {
+		if (bushWhacker !== '') {
 		userWords.push(bushWhacker);
 		}
 	} 	
-		console.log(userWords);
 	while (userWords.length < 4) {
-		userWords.push(defaultWords[Math.floor(Math.random() * 10)]);
+		var randomWord = defaultWords[Math.floor(Math.random() * 10)];
+		if (userWords.indexOf(randomWord) === -1) {
+			userWords.push(randomWord);
+		}
 	}
 	return userWords;
 }
 
-// randomly append the items in the 'final' arrays to the stories.
+function assignWords (finalWords, className, idName) {
+	doTheShuffle(finalWords);
+	var parent = document.getElementById(idName);
+	var children = parent.getElementsByClassName(className);
+	for (var i = 0; i < 4; i++) {
+		children[i].innerHTML = finalWords[i]
+	}
+}
+
+function doTheShuffle(peanut) {
+	for (var i = peanut.length-1; i>=0; i--) {
+		var randomIndex = Math.floor(Math.random()*(i+1));
+		var itemAtIndex = peanut[randomIndex];
+		peanut[randomIndex] = peanut[i];
+		peanut[i] = itemAtIndex;
+	}
+}
+
+// function displayNone() {
+// 	getElementsByClassName('stories')
+// }
+
+function display(story) {
+	document.getElementById(story).classList.add('show');
+}
+
+function hideStories() {
+	var storyList = document.getElementsByClassName('stories');
+	for (var i=0; i < storyList.length; i++) {
+		storyList[i].classList.remove('show');
+	}
+}
+
+
